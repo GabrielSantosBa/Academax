@@ -15,15 +15,13 @@
 
 	<h:form>
 
-		<h:outputText value="Alunos" for="idAluno" />
-		<p:selectOneMenu value="#{mensalidadeBean.alunoId}" id="idAluno" >
+		<p:selectOneMenu value="#{mensalidadeBean.alunoId}">
 			<f:selectItems 
-				value="#{alunoBean.consultarAlunos()}"
-				var="#{aluno}" 
-				itemLabel="#{aluno.nome}" 
-				itemValue="#{aluno.id}"/>	
-				
-				
+				var="aluno" 
+				value="#{alunoBean.consultarAlunos()}" 
+				itemValue="#{aluno.id}" 
+				itemLabel="#{aluno.nome}">			
+			</f:selectItems>			
 		</p:selectOneMenu>
 
 		<h:outputText value="Data Pagamento" for="dataNasc" />

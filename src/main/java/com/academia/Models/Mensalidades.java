@@ -3,6 +3,7 @@ package com.academia.Models;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,10 +28,10 @@ public class Mensalidades {
 	public Mensalidades() {
 	}
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinTable(name = "tb_aluno_mensalidade",joinColumns = @JoinColumn(name = "idaluno"),
 	inverseJoinColumns = @JoinColumn(name = "cod"))
-	private Aluno aluno = new Aluno();
+	private Aluno aluno;
 
 	public Aluno getAluno() {
 		return aluno;
