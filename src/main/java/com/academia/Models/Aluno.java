@@ -17,6 +17,9 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 public class Aluno implements Serializable {
@@ -27,9 +30,11 @@ public class Aluno implements Serializable {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id_tb_aluno", nullable = false)
+	@Column(name = "idaluno", nullable = false)
 	private Integer id = 1;
+	@NotBlank
 	private String nome;
+	@NotNull
 	private String celular;
 	
 	@CPF
@@ -42,8 +47,11 @@ public class Aluno implements Serializable {
 	public Aluno() {
 	}
 	
-	@OneToMany(mappedBy = "alunos", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Conta> conta = new ArrayList<>();
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -81,11 +89,42 @@ public class Aluno implements Serializable {
 		this.celular = celular;
 	}
 
+	
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aluno other = (Aluno) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Aluno [id=" + id + ", nome=" + nome + ", celular=" + celular + ", cpf=" + cpf + ", dataNascimento="
-				+ dataNascimento + ", conta=" + conta + "]";
+				+ dataNascimento + "]";
 	}
+
 	
 	
 	

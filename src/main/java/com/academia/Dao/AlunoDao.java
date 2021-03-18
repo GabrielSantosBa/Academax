@@ -26,15 +26,7 @@ public class AlunoDao {
 		String jpql = "SELECT l FROM Aluno l";
 		return manager.createQuery(jpql, Aluno.class).getResultList();
 	}
-	// READY
-		@SuppressWarnings("unchecked")
-		public List<Aluno> listarIdNome() {
-			Query query = manager.createQuery("SELECT l.id, l.nome FROM Aluno l");
 		
-			return query.getResultList();
-		}
-
-	
 	// UPDATE
 	public Aluno atualiza(Aluno aluno) {
 		return manager.merge(aluno);
@@ -56,5 +48,12 @@ public class AlunoDao {
 	public void remove(Aluno aluno) {
 		manager.remove(manager.contains(aluno) ? "Está Managed" : manager.merge(aluno));
 	}
+
+	public Aluno buscaPorId(Class<Aluno> aluno, Integer alunoId) {
+		// TODO Auto-generated method stub
+		return manager.find(Aluno.class, alunoId);
+	}
+
+	
 
 }

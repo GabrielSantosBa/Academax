@@ -16,26 +16,26 @@
 	<h:form>
 
 		<h:outputText value="Alunos" for="idAluno" />
-		<h:selectOneMenu value="#{contaBean.alunoId}" id="idAluno" >
+		<p:selectOneMenu value="#{mensalidadeBean.alunoId}" id="idAluno" >
 			<f:selectItems 
-				value="#{alunoConsulta.buscarAlunos()}"
+				value="#{alunoBean.consultarAlunos()}"
 				var="#{aluno}" 
 				itemLabel="#{aluno.nome}" 
 				itemValue="#{aluno.id}"/>	
 				
-				<p:commandButton value="Selecionar Aluno" action="#{contaBean.alunoId}"/>
-		</h:selectOneMenu>
+				
+		</p:selectOneMenu>
 
 		<h:outputText value="Data Pagamento" for="dataNasc" />
-		<p:calendar id="dataNasc" value="#{contaBean.conta.dataPagamento}"
+		<p:calendar id="dataNasc" value="#{mensalidadeBean.mensalidade.dataPagamento}"
 			locale="pt" navigator="true" pattern="dd/MM/yyyy" showOn="button"
 			placeholder="Data de Pagamento" mask="99/99/9999">
 		</p:calendar>
 
 		<p:outputLabel for="nome" />
-		<p:inputText id="nome" value="#{contaBean.conta.valor}" />
+		<p:inputText id="nome" value="#{mensalidadeBean.mensalidade.valor}" />
 
-		<p:commandButton action="#{contaBean.cadastrarConta()}"
+		<p:commandButton action="#{mensalidadeBean.cadastrarConta()}"
 			value="Cadastrar" />
 
 	</h:form>
