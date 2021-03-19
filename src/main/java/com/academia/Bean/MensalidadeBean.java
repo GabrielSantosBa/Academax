@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import com.academia.Dao.AlunoDao;
 import com.academia.Dao.MensalidadeDao;
 import com.academia.Models.Aluno;
-import com.academia.Models.Mensalidades;
+import com.academia.Models.Mensalidade;
 
 @Named 
 @RequestScoped
@@ -19,22 +19,20 @@ public class MensalidadeBean {
 	@Inject
 	private MensalidadeDao contaDao;	
 	@Inject
-	private Mensalidades mensalidade;
+	private Mensalidade mensalidade;
 	@Inject
 	private AlunoDao alunoDao;
-	@Inject
-	private Aluno aluno;
 
 
 	private Integer alunoId;
 	
 
 
-	public Mensalidades getMensalidade() {
+	public Mensalidade getMensalidade() {
 		return mensalidade;
 	}
 
-	public void setMensalidade(Mensalidades mensalidade) {
+	public void setMensalidade(Mensalidade mensalidade) {
 		this.mensalidade = mensalidade;
 	}
 	public Integer getAlunoId() {
@@ -47,11 +45,11 @@ public class MensalidadeBean {
 
 
 	@Transactional // CREATE
-	public Mensalidades cadastrarConta() {	
+	public Mensalidade cadastrarConta() {	
 		
 		Aluno aluno = alunoDao.buscaPorId(Aluno.class, alunoId);	
 		
-		this.mensalidade.getAluno();
+		this.mensalidade.setAluno(aluno);
 		
 		contaDao.insert(mensalidade);
 		return mensalidade;		

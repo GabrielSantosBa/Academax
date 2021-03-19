@@ -43,7 +43,22 @@ public class Aluno implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "aluno")
+	private List<Mensalidade> mensalidade;
 	
+	
+
+
+	public List<Mensalidade> getMensalidade() {
+		return mensalidade;
+	}
+
+
+	public void setMensalidade(List<Mensalidade> mensalidade) {
+		this.mensalidade = mensalidade;
+	}
+
+
 	public Aluno() {
 	}
 	

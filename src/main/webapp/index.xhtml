@@ -4,6 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -14,45 +15,7 @@
 <h:body>
 
 
-	<h1>
-		Cadastro de Alunos <i class="pi pi-home"></i>
-	</h1>
-	<h:form id="formCadastro">
-		<p:growl />
-		<p:panelGrid id="grid" columns="3" cellpadding="5">
-			<h:outputText value="Nome do Aluno *" for="nome" />
-			<p:inputText id="nome" value="#{alunoBean.aluno.nome}"
-				required="true" placeholder="Digite o Nome"
-				requiredMessage="Nome necessario" />
-			<p:message for="nome" />
-
-
-			<h:outputText value="Cpf" for="cpf" />
-			<p:inputMask id="cpf" mask="999.999.999-99"
-				value="#{alunoBean.aluno.cpf}" requiredMessage="CPF e Obrigatario"
-				placeholder="Cpf do Aluno" />
-			<p:message for="cpf" />
-
-			<h:outputText value="Data Nascimento" for="dataNasc" />
-			<p:calendar id="dataNasc" value="#{alunoBean.aluno.dataNascimento}"
-				locale="pt" navigator="true" pattern="dd/MM/yyyy" showOn="button"
-				placeholder="Data de Nascimento" mask="99/99/9999">
-			</p:calendar>
-			<p:message for="dataNasc" />
-
-			<p:outputLabel for="cel" value="Celular" />
-			<p:inputMask id="cel" placeholder="Celular zap" mask="99-9-9999-9999"
-				value="#{alunoBean.aluno.celular}" />
-			<p:message for="cel" />
-
-			<p:commandButton update="@form :formListaAlunos" id="btnEnviar"
-				action="#{alunoBean.cadastrarAluno()}" value="Cadastrar"></p:commandButton>
-
-		</p:panelGrid>
-
-	</h:form>
-
-
+	
 	<h2>
 		Alunos Cadastrados <i class="pi pi-users"></i>
 	</h2>
@@ -72,12 +35,6 @@
 				<p:commandLink update="@form :formListaAlunos"
 					action="#{alunoBean.remover(aluno)}">
 					<i class="pi pi-trash"></i>
-				</p:commandLink>
-				&nbsp;
-				&nbsp;
-				<p:commandLink update="@form :formCadastro"
-					action="#{alunoRetornadoBean.consultar(aluno)}">
-					<i class="pi pi-pencil"></i>
 				</p:commandLink>
 			</p:column>
 		</p:dataTable>

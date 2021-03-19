@@ -3,34 +3,29 @@ package com.academia.Models;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 
-import com.sun.istack.internal.NotNull;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
-public class Mensalidades {
+public class Mensalidade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cod;
-	@NotNull
+	@NotEmpty
 	private BigDecimal valor;
-	@jakarta.validation.constraints.NotNull
+	@NotEmpty
 	private Date dataPagamento;
 	
-	public Mensalidades() {
+	public Mensalidade() {
 	}
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinTable(name = "tb_aluno_mensalidade",joinColumns = @JoinColumn(name = "idaluno"),
-	inverseJoinColumns = @JoinColumn(name = "cod"))
+	@ManyToOne	
 	private Aluno aluno;
 
 	public Aluno getAluno() {
@@ -82,7 +77,7 @@ public class Mensalidades {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Mensalidades other = (Mensalidades) obj;
+		Mensalidade other = (Mensalidade) obj;
 		if (cod == null) {
 			if (other.cod != null)
 				return false;

@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.academia.Models.Aluno;
-import com.academia.Models.Mensalidades;
+import com.academia.Models.Mensalidade;
 
 public class MensalidadeDao {
 
@@ -17,7 +17,7 @@ public class MensalidadeDao {
 
 
 	// INSERT
-	public void insert(Mensalidades conta) {
+	public void insert(Mensalidade conta) {
 		manager.persist(conta);		
 		System.out.println("A CONTA "+conta);
 	}
