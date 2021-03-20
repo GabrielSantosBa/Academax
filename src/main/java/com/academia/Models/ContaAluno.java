@@ -9,33 +9,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import jakarta.validation.constraints.NotEmpty;
-
 @Entity
-public class Mensalidade {
+public class ContaAluno {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cod;
-	@NotEmpty
+
 	private BigDecimal valor;
-	@NotEmpty
+	
 	private Date dataPagamento;
 	
-	public Mensalidade() {
+	public ContaAluno() {
 	}
 	
-	@ManyToOne	
-	private Aluno aluno;
-
-	public Aluno getAluno() {
-		return aluno;
-	}
-
-
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
-	}
+//	@ManyToOne	
+//	private Aluno aluno;
+//
+//	public Aluno getAluno() {
+//		return aluno;
+//	}
+//
+//
+//	public void setAluno(Aluno aluno) {
+//		this.aluno = aluno;
+//	}
 
 
 	public Integer getCod() {
@@ -77,7 +75,7 @@ public class Mensalidade {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Mensalidade other = (Mensalidade) obj;
+		ContaAluno other = (ContaAluno) obj;
 		if (cod == null) {
 			if (other.cod != null)
 				return false;
@@ -86,13 +84,13 @@ public class Mensalidade {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Mensalidades [cod=" + cod + ", valor=" + valor + ", dataPagamento=" + dataPagamento + ", aluno=" + aluno
-				+ "]";
+		return "ContaAluno [cod=" + cod + ", valor=" + valor + ", dataPagamento=" + dataPagamento + "]";
 	}
 
+
+	
 
 
 }

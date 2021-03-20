@@ -4,21 +4,22 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
-import com.academia.Bean.AlunoRetornadoBean;
 import com.academia.Models.Aluno;
 
 public class AlunoDao {
 
-	AlunoRetornadoBean alunoRetornado = new AlunoRetornadoBean();
 
 	@PersistenceContext
 	private EntityManager manager;
 
 	// CREATE
-	public void insert(Aluno aluno) {
+	public Aluno insert(Aluno aluno) {
+//		if (alun) {
+//		throw new DaoException("O Produto Informado n�o e valido", ErrorCode.BAD_REQUEST.getCode());
+//	}
 		manager.persist(aluno);
+		return aluno;
 	}
 
 	// READY
@@ -29,12 +30,12 @@ public class AlunoDao {
 		
 	// UPDATE
 	public Aluno atualiza(Aluno aluno) {
-		return manager.merge(aluno);
+		return manager.contains(aluno) ? null: manager.merge(aluno);
 	}
 
 	// Search By ID
-	public Aluno buscaPorId(Aluno aluno) {
-		return manager.find(Aluno.class, aluno.getId());
+	public Aluno buscaPorId(Integer id) {
+		return manager.find(Aluno.class, id);
 	}
 	
 	// Search By ID

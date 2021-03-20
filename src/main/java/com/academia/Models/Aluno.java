@@ -1,10 +1,11 @@
 package com.academia.Models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,11 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.validator.constraints.br.CPF;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 
 @Entity
@@ -32,32 +28,22 @@ public class Aluno implements Serializable {
 	@GeneratedValue
 	@Column(name = "idaluno", nullable = false)
 	private Integer id = 1;
-	@NotBlank
+	
 	private String nome;
-	@NotNull
+	
 	private String celular;
 	
-	@CPF
+	
 	private String cpf;
 	
 	@Temporal(TemporalType.DATE)
-	private Date dataNascimento;
+	@JsonbDateFormat(value = "dd-MM-yyyy")
+	private Calendar dataNascimento;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "aluno")
-	private List<Mensalidade> mensalidade;
+//	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "aluno")
+//	private List<ContaAluno> mensalidade;
 	
 	
-
-
-	public List<Mensalidade> getMensalidade() {
-		return mensalidade;
-	}
-
-
-	public void setMensalidade(List<Mensalidade> mensalidade) {
-		this.mensalidade = mensalidade;
-	}
-
 
 	public Aluno() {
 	}
@@ -88,13 +74,14 @@ public class Aluno implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Date getDataNascimento() {
+	public Calendar getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(Calendar dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
 
 	public String getCelular() {
 		return celular;
