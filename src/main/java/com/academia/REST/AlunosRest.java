@@ -20,6 +20,8 @@ import com.academia.Models.Aluno;
 import com.academia.REST.Service.ServiceAluno;
 
 @Path("/aluno")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class AlunosRest {
 
 	
@@ -29,16 +31,13 @@ public class AlunosRest {
 	private ServiceAluno service;
 
 	@GET
-	@Path("/")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)	
+	@Path("/")		
 	public List<Aluno> findAll() {
 		return service.listarTodosAlunos();
 	}
 
 	@GET
 	@Path("/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
 	public Aluno findById(@PathParam("id") Integer id) {
 		Aluno aluno = service.buscarPorId(id);
 		if (aluno == null) {
@@ -49,8 +48,6 @@ public class AlunosRest {
 	
 	
 	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON) //veririficar se precisa do transactional
 	@Transactional
 	public Aluno cadastrarAluno(Aluno aluno) {
 		return service.cadastrarAluno(aluno);
@@ -58,19 +55,25 @@ public class AlunosRest {
 	
 	@DELETE
 	@Path("/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Transactional
 	public void deletarAluno(@PathParam("id") Integer id, Aluno aluno) {		
-			service.excluirAluno(aluno);
+			
+		aluno = service.buscarPorId(id);
+		service.excluirAluno(aluno);
 	}
 	
 	@PUT
 	@Path("/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Transactional
 	public Aluno atualizarAluno(@PathParam("id") Integer id, Aluno aluno) {		
-		return service.atualizarAluno(aluno);
+		
+		Aluno alunoAtualizado = service.buscarPorId(id);		
+	
+		alunoAtualizado.setCelular(aluno.getCelular());
+		alunoAtualizado.setCpf(aluno.getCpf());
+		alunoAtualizado.setDataNascimento(aluno.getDataNascimento());
+		alunoAtualizado.setNome(aluno.getNome());		
+		return service.atualizarAluno(alunoAtualizado);
 	}
 	
 	

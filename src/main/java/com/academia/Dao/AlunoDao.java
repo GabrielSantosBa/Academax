@@ -30,7 +30,7 @@ public class AlunoDao {
 		
 	// UPDATE
 	public Aluno atualiza(Aluno aluno) {
-		return manager.contains(aluno) ? null: manager.merge(aluno);
+		return manager.merge(aluno);
 	}
 
 	// Search By ID
@@ -47,7 +47,9 @@ public class AlunoDao {
 
 	// DELETE
 	public void remove(Aluno aluno) {
-		manager.remove(manager.contains(aluno) ? "Está Managed" : manager.merge(aluno));
+		
+		manager.remove(aluno);
+		//manager.remove(manager.contains(aluno) ? "Está Managed" : manager.merge(aluno));
 	}
 
 	public Aluno buscaPorId(Class<Aluno> aluno, Integer alunoId) {
